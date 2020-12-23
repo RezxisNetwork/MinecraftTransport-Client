@@ -1,0 +1,7 @@
+name: MinecraftTransport
+main: net.rezxis.mctp.client.MinecraftTransport
+version: 1
+loadbefore: ["ProtocolLib"]
+commands:
+  checkip:
+    description: A command to check reserved ip.

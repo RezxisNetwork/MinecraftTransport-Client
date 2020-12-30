@@ -41,7 +41,8 @@ public class TunnelListener implements Runnable {
 				}
 			}
 		} catch (Exception ex) {
-			ex.printStackTrace();
+			if (!ex.getMessage().contains("Socket closed"))
+				ex.printStackTrace();
 		}
 	}
 }

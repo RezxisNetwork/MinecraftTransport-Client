@@ -8,13 +8,11 @@ public class SocketTransporter implements Runnable {
 	private InputStream is;
 	private OutputStream os;
 	private CloseCallback cb;
-	private boolean up;
 	
-	public SocketTransporter(InputStream is, OutputStream os, CloseCallback cb, boolean up) {
+	public SocketTransporter(InputStream is, OutputStream os, CloseCallback cb) {
 		this.is = is;
 		this.os = os;
 		this.cb = cb;
-		this.up = up;
 	}
 
 	@Override

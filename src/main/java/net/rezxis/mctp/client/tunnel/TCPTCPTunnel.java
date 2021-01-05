@@ -31,8 +31,8 @@ public class TCPTCPTunnel implements Runnable {
 			}
 			spigot = new Socket(host, Bukkit.getServer().getPort());
 			spigot.setTcpNoDelay(true);
-			new Thread(new SocketTransporter(spigot.getInputStream(), socket.getOutputStream(), new CloseCallback(this),true)).start();
-			new Thread(new SocketTransporter(socket.getInputStream(), spigot.getOutputStream(), new CloseCallback(this),true)).start();
+			new Thread(new SocketTransporter(spigot.getInputStream(), socket.getOutputStream(), new CloseCallback(this))).start();
+			new Thread(new SocketTransporter(socket.getInputStream(), spigot.getOutputStream(), new CloseCallback(this))).start();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

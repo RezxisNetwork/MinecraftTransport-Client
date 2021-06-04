@@ -4,6 +4,8 @@ import java.io.InputStream;
 import java.nio.ByteBuffer;
 
 import net.rezxis.mctp.client.MinecraftTransport;
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 
 public class TunnelListener implements Runnable {
 
@@ -25,14 +27,16 @@ public class TunnelListener implements Runnable {
 					byte[] ipBuf = new byte[ipLen];
 					bb.get(ipBuf, 0, ipLen);
 					String ip = new String(ipBuf);
-					String msg = "## reserved ip:"+ip+ " ##";
+					String msg = "[!] Connection IP: "+ip;
 					String split = "";
 					for (int i = 0; i < msg.length(); i++) {
-						split += "#";
+						split += "-";
 					}
-					System.out.println(split);
-					System.out.println(msg);
-					System.out.println(split);
+					Bukkit.getConsoleSender().sendMessage(ChatColor.GRAY + split);
+					Bukkit.getConsoleSender().sendMessage("");
+					Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + msg);
+					Bukkit.getConsoleSender().sendMessage("");
+					Bukkit.getConsoleSender().sendMessage(ChatColor.GRAY + split);
 					MinecraftTransport.ip = ip;
 				} else if (buffer[0] == 0x2) {
 					bb.position(1);

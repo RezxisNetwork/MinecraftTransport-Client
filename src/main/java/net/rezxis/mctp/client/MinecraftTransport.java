@@ -14,6 +14,7 @@ import java.lang.reflect.ParameterizedType;
 import java.util.List;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -25,28 +26,38 @@ public class MinecraftTransport extends JavaPlugin {
 	
 	public void onLoad(){
 		try {
-			System.out.println("Loading Config...");
+			Bukkit.getConsoleSender().sendMessage(ChatColor.GRAY + "────────────────────────────────────────────────────────────");
+			Bukkit.getConsoleSender().sendMessage("");
+			Bukkit.getConsoleSender().sendMessage(ChatColor.BLUE +" M C T P - P R O J E C T");
+			Bukkit.getConsoleSender().sendMessage(ChatColor.AQUA + "Make it possible to publish a server without opening ports.");
+			Bukkit.getConsoleSender().sendMessage("");
+			Bukkit.getConsoleSender().sendMessage(ChatColor.AQUA + "Powered by NOHIT.CC");
+			Bukkit.getConsoleSender().sendMessage(ChatColor.AQUA + "* Free Minecraft DDoS Mitigation Services *");
+			Bukkit.getConsoleSender().sendMessage("");
+			Bukkit.getConsoleSender().sendMessage(ChatColor.GRAY + "────────────────────────────────────────────────────────────");
+			Bukkit.getConsoleSender().sendMessage(ChatColor.AQUA + "Loading config...");
 			config = new Config(this);
-			System.out.println("Host : "+config.server);
-			System.out.println("Loaded config!");
+			Bukkit.getConsoleSender().sendMessage(ChatColor.AQUA + "Relay host: " + config.server);
+			if (config.server == null) Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "Config has been generated! Please reboot the server!");
+			Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + "Loaded config!");
 		} catch (Exception e1) {
-			System.out.println("Failed to load config!");
+			Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "Failed to load config! If there is a problem, report it to the developer.");
 			e1.printStackTrace();
 		}
 		try {
-			System.out.println("Injecting NettyHandler...");
+			Bukkit.getConsoleSender().sendMessage(ChatColor.AQUA + "Injecting NettyHandler...");
 			inject();
-			System.out.println("Injected NettyHandler!");
+			Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + "Injected NettyHandler!");
 		} catch (Exception e) {
-			System.out.println("Failed to inject NettyHandler!");
+			Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "Failed to inject NettyHandler!");
 			e.printStackTrace();
 		}
 		try {
-			System.out.println("Building tunnel...");
+			Bukkit.getConsoleSender().sendMessage(ChatColor.AQUA + "Building tunnel...");
 			TCPTunnel.build();
-			System.out.println("Built tunnel!");
+			Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + "Built tunnel!");
 		} catch (Exception e) {
-			System.out.println("Failed to build tunnel!");
+			Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "Failed to build tunnel!");
 			e.printStackTrace();
 		}
 	}
@@ -59,7 +70,7 @@ public class MinecraftTransport extends JavaPlugin {
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
 		if (cmd.getName().equalsIgnoreCase("checkip")) {
-			sender.sendMessage(ip+" がこのサーバーに割り当てられています。");
+			sender.sendMessage(ip+" has been assigned to this server.");
 		}
 		return true;
 	}

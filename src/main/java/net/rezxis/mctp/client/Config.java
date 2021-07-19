@@ -14,7 +14,7 @@ public class Config {
 		FileConfiguration configuration = new YamlConfiguration();
 		File file = new File(plugin.getDataFolder(),"mctp.yml");
 		if (!file.exists()) {
-			configuration.set("server", "mctp.nohit.cc");
+			configuration.set("server", "mctp.lunac.xyz");
 			configuration.save(file);
 		} else {
 			configuration.load(file);

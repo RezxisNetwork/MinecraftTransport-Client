@@ -1,6 +1,6 @@
 name: MinecraftTransport
 main: net.rezxis.mctp.client.MinecraftTransport
-version: 1.1
+version: 1.2
 description: Publish a server without opening ports.
 authors: [Lunac, Cur]
 website: https://nohit.cc/mctp

@@ -12,6 +12,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
+import java.util.Objects;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -26,38 +27,37 @@ public class MinecraftTransport extends JavaPlugin {
 	
 	public void onLoad(){
 		try {
-			Bukkit.getConsoleSender().sendMessage(ChatColor.GRAY + "────────────────────────────────────────────────────────────");
+			Bukkit.getConsoleSender().sendMessage(ChatColor.GRAY + "============================================================");
 			Bukkit.getConsoleSender().sendMessage("");
 			Bukkit.getConsoleSender().sendMessage(ChatColor.BLUE +" M C T P - P R O J E C T");
-			Bukkit.getConsoleSender().sendMessage(ChatColor.AQUA + "ポートを開けずにサーバーを公開できるようにする。");
+			Bukkit.getConsoleSender().sendMessage(ChatColor.AQUA + "Publish a server without opening ports.");
 			Bukkit.getConsoleSender().sendMessage("");
-			Bukkit.getConsoleSender().sendMessage(ChatColor.AQUA + "Lunacがフォークし、運用しています。");
+			Bukkit.getConsoleSender().sendMessage(ChatColor.AQUA + "Forked and operated by Lunac.");
 			Bukkit.getConsoleSender().sendMessage("");
-			Bukkit.getConsoleSender().sendMessage(ChatColor.GRAY + "────────────────────────────────────────────────────────────");
-			Bukkit.getConsoleSender().sendMessage(ChatColor.AQUA + "Configを読み込んでいます。");
+			Bukkit.getConsoleSender().sendMessage(ChatColor.GRAY + "============================================================");
+			Bukkit.getConsoleSender().sendMessage(ChatColor.AQUA + "Loading config...");
 			config = new Config(this);
-			Bukkit.getConsoleSender().sendMessage(ChatColor.AQUA + "中継ホスト: " + config.server);
-			if (config.server == null) Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "コンフィグが生成されました。サーバーを再起動してください！");
-			Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + "Configを読み込みました。");
+			Bukkit.getConsoleSender().sendMessage(ChatColor.AQUA + "Relay Host: " + config.server);
+			if (config.server == null) Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "Config has been generated. Please reboot the server!");
+			Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + "Config loaded!");
 		} catch (Exception e1) {
-			Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "Configの読み込みに失敗しました。 問題がある場合は、開発者に報告してください。");
+			Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "Failed to load Config. Please report any problems to the developers.");
 			e1.printStackTrace();
 		}
 		try {
-			Bukkit.getConsoleSender().sendMessage(ChatColor.AQUA + "NettyHandlerをインジェクトしています・・・");
+			Bukkit.getConsoleSender().sendMessage(ChatColor.AQUA + "Injecting NettyHandler.");
 			inject();
-			Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + "NettyHandlerをインジェクトしました！");
+			Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + "NettyHandler injected!");
 		} catch (Exception e) {
-			Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "NettyHandlerのインジェクションに失敗しました。");
+			Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "Failed to inject NettyHandler.");
 			e.printStackTrace();
 		}
 		try {
-			Bukkit.getConsoleSender().sendMessage(ChatColor.AQUA + "トンネルを作成中・・・");
+			Bukkit.getConsoleSender().sendMessage(ChatColor.AQUA + "Building tunnel.");
 			TCPTunnel.build();
-			Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + "トンネルを作成しました！");
+			Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + "Built tunnel!");
 		} catch (Exception e) {
-			Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "トンネルの作成に失敗しました。 : " + e);
-			e.printStackTrace();
+			Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "Failed to create the tunnel. > " + e);
 		}
 	}
 	
@@ -69,7 +69,7 @@ public class MinecraftTransport extends JavaPlugin {
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
 		if (cmd.getName().equalsIgnoreCase("checkip")) {
-			sender.sendMessage(ip+" は、このサーバーに割り当てられています。");
+			sender.sendMessage(ip+" is assigned to this server.");
 		}
 		return true;
 	}
@@ -87,7 +87,7 @@ public class MinecraftTransport extends JavaPlugin {
 			serverConnectionMethod = method;
 			break;
 		}
-		Object serverConnection = serverConnectionMethod.invoke(minecraftServer);
+		Object serverConnection = Objects.requireNonNull(serverConnectionMethod).invoke(minecraftServer);
 		List<ChannelFuture> channelFutureList = null;
 		for (Field field : serverConnection.getClass().getDeclaredFields()) {
 			if (field.getType().getName().contains("List") ) {

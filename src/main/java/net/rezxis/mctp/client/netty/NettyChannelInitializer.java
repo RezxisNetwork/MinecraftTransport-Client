@@ -19,8 +19,8 @@ public class NettyChannelInitializer extends ChannelInitializer<SocketChannel> {
 
 	public static final String NMS_VERSION = Bukkit.getServer().getClass().getPackage().getName().substring(23);
 	private static Field fieldL;
-	private ChannelInitializer<SocketChannel> oldChildHandler;
-	private Method oldChildHandlerMethod;
+	private final ChannelInitializer<SocketChannel> oldChildHandler;
+	private final Method oldChildHandlerMethod;
 	
 	public NettyChannelInitializer(ChannelInitializer<SocketChannel> oldChildHandler) throws Exception {
 		this.oldChildHandler = oldChildHandler;

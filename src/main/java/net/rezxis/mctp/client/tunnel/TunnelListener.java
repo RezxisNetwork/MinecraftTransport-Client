@@ -27,7 +27,7 @@ public class TunnelListener implements Runnable {
 					byte[] ipBuf = new byte[ipLen];
 					bb.get(ipBuf, 0, ipLen);
 					String ip = new String(ipBuf);
-					String msg = "[!] Connection IP: "+ip;
+					String msg = "[!] Connect IP Address: "+ip;
 					String split = "";
 					for (int i = 0; i < msg.length(); i++) {
 						split += "-";

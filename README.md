@@ -1,3 +1,6 @@
+[![GitHub issues](https://img.shields.io/github/issues/nohit-cc/MCTP-Project?style=for-the-badge)](https://github.com/nohit-cc/MCTP-Project/issues)
+[![GitHub stars](https://img.shields.io/github/stars/nohit-cc/MCTP-Project?style=for-the-badge)](https://github.com/nohit-cc/MCTP-Project/stargazers)
+[![GitHub license](https://img.shields.io/github/license/nohit-cc/MCTP-Project?style=for-the-badge)](https://github.com/nohit-cc/MCTP-Project)
 # MCTP-Project
 ポート開放無しでサーバーを公開できるSpigotプラグインです。
 Paper / Bukkit / Spigot 等で動きます。

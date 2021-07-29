@@ -11,7 +11,7 @@ Cannot be used for vanilla servers or mod servers.
 2. The first boot requires a reboot to generate Config.
 3. After rebooting, the IP displayed in the console will be the IP address and port number to connect to.
 
-#WARNING
+# WARNING
 version 0.0.1-SNAPSHOT and version 0.0.2-SNAPSHOT are not compatible!  
 you have to regenerate configuration file.
 

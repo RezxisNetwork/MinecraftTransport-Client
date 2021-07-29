@@ -17,9 +17,9 @@ version 0.0.1-SNAPSHOT and version 0.0.2-SNAPSHOT are not compatible!
 you have to regenerate configuration file.
 
 # Proxy Server
-mctp1.nohit.cc
-mctp2.nohit.cc
-mctp3.nohit.cc
+mctp1.nohit.cc  
+mctp2.nohit.cc  
+mctp3.nohit.cc  
 
 # Support
 [![Discord Banner 4](https://discordapp.com/api/guilds/867326068758806558/widget.png?style=banner4)](https://discord.gg/MPJgMEYRNM)

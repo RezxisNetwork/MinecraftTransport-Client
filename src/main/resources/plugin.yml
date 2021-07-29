@@ -1,6 +1,6 @@
 name: MinecraftTransport
 main: net.rezxis.mctp.client.MinecraftTransport
-version: 1
+version: 0.0.2-SNAPSHOT
 loadbefore: ["ProtocolLib"]
 commands:
   checkip:

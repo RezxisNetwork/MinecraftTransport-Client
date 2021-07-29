@@ -6,7 +6,6 @@ import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelPipeline;
 import io.netty.channel.socket.SocketChannel;
 import net.rezxis.mctp.client.netty.NettyChannelInitializer;
-import net.rezxis.mctp.client.tunnel.TCPTunnel;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -19,52 +18,52 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class MinecraftTransport extends JavaPlugin {
-	
+
+	public static MinecraftTransport instance;
 	public static String ip;
 	public static Config config;
+	public static MCTPClient client;
 	
 	public void onLoad(){
+		instance = this;
 		try {
-			System.out.println("Loading Config...");
+			getLogger().info("Loading Config...");
 			config = new Config(this);
-			System.out.println("Host : "+config.server);
-			System.out.println("Loaded config!");
+			getLogger().info("MCTP-Host : "+config.host+":"+config.port);
+			getLogger().info("Loaded config!");
 		} catch (Exception e1) {
-			System.out.println("Failed to load config!");
+			getLogger().warning("Failed to load config!");
 			e1.printStackTrace();
 		}
 		try {
-			System.out.println("Injecting NettyHandler...");
+			getLogger().info("Injecting NettyHandler...");
 			inject();
-			System.out.println("Injected NettyHandler!");
+			getLogger().info("Injected NettyHandler!");
 		} catch (Exception e) {
-			System.out.println("Failed to inject NettyHandler!");
+			getLogger().warning("Failed to inject NettyHandler!");
 			e.printStackTrace();
 		}
-		try {
-			System.out.println("Building tunnel...");
-			TCPTunnel.build();
-			System.out.println("Built tunnel!");
-		} catch (Exception e) {
-			System.out.println("Failed to build tunnel!");
-			e.printStackTrace();
-		}
+		client = new MCTPClient(config.host,config.port);
+		new Thread(client).start();
+	}
+
+	public void onEnable() {
+		if (ip != null)
+			getLogger().info(ip+" is assigned address to this server.");
 	}
 	
 	public void onDisable() {
-		TCPTunnel.close();
-		
+		client.close();
 	}
 	
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
 		if (cmd.getName().equalsIgnoreCase("checkip")) {
-			sender.sendMessage(ip+" がこのサーバーに割り当てられています。");
+			sender.sendMessage(ip+" is assigned address to this server.");
 		}
 		return true;
 	}
-	
-	@SuppressWarnings("unchecked")
+
 	private void inject() throws Exception {
 		Method serverGetHandle = Bukkit.getServer().getClass().getDeclaredMethod("getServer");
 		Object minecraftServer = serverGetHandle.invoke(Bukkit.getServer());

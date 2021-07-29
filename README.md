@@ -1,4 +1,3 @@
-MCTP-Client
 [![GitHub issues](https://img.shields.io/github/issues/RezxisNetwork/MinecraftTransport-Client?style=for-the-badge)](https://github.com/RezxisNetwork/MinecraftTransport-Client/issues)
 [![GitHub stars](https://img.shields.io/github/stars/RezxisNetwork/MinecraftTransport-Client?style=for-the-badge)](https://github.com/RezxisNetwork/MinecraftTransport-Client/stargazers)
 [![GitHub license](https://img.shields.io/github/license/RezxisNetwork/MinecraftTransport-Client?style=for-the-badge)](https://github.com/RezxisNetwork/MinecraftTransport-Client)

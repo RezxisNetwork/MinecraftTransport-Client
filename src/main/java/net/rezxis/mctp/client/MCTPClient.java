@@ -75,13 +75,15 @@ public class MCTPClient extends ChannelInboundHandlerAdapter implements Runnable
 
     @Override
     public void channelInactive(ChannelHandlerContext ctx) throws Exception {
-        MinecraftTransport.instance.getLogger().warning("disconnected from MCTP server. reconnecting after 5 seconds.");
-        Bukkit.getScheduler().runTaskLaterAsynchronously(MinecraftTransport.instance, new Runnable() {
-            @Override
-            public void run() {
-                MCTPClient.this.run();
-            }
-        }, 20 * 5);
+        if (!MinecraftTransport.instance.disabling) {
+            MinecraftTransport.instance.getLogger().warning("disconnected from MCTP server. reconnecting after 5 seconds.");
+            Bukkit.getScheduler().runTaskLaterAsynchronously(MinecraftTransport.instance, new Runnable() {
+                @Override
+                public void run() {
+                    MCTPClient.this.run();
+                }
+            }, 20 * 5);
+        }
     }
 
     private String readString(ByteBuf buf){

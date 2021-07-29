@@ -23,6 +23,7 @@ public class MinecraftTransport extends JavaPlugin {
 	public static String ip;
 	public static Config config;
 	public static MCTPClient client;
+	public static boolean disabling;
 	
 	public void onLoad(){
 		instance = this;
@@ -53,6 +54,7 @@ public class MinecraftTransport extends JavaPlugin {
 	}
 	
 	public void onDisable() {
+		disabling = true;
 		client.close();
 	}
 	

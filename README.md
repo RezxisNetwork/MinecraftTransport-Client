@@ -21,5 +21,4 @@ mctp2.nohit.cc:9998
 mctp3.nohit.cc:9998  
 
 # Support
-[![Discord Banner 4](https://discordapp.com/api/guilds/867326068758806558/widget.png?style=banner4)](https://discord.gg/MPJgMEYRNM)
 [![Discord Banner 4](https://discordapp.com/api/guilds/691818868943093812/widget.png?style=banner4)](https://discord.nohit.cc)
